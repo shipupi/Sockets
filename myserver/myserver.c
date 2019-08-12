@@ -1,14 +1,5 @@
-#include <time.h>
-#include <netdb.h> 
-#include <stdio.h> 
-#include <unistd.h> 
-#include <netinet/in.h> 
-#include <stdlib.h> 
-#include <string.h> 
-#include <sys/socket.h> 
-#include <sys/types.h> 
-#include <errno.h>
 #include "myserver.h"
+
 #define MAX 80 
 #define PORTNUMBER 995
 
@@ -51,7 +42,8 @@ int main()
     int bindAns;
     if ((bindAns = bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) < 0) { 
         printf("socket bind failed... %d \n", bindAns); 
-        printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
+        perror("Oh dear, something went wrong with read()!");
+
         exit(0); 
     } 
     printf("Socket successfully binded..\n"); 

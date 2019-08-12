@@ -1,16 +1,15 @@
 CC=gcc
 CFLAGS = -Wall -I.
-INC = ../libs/
-deps = mailClient.h tcpConnect.h
-objects = mailClient.o tcpConnect.o
-target = mailClient
+#INC = ../libs/
+DEPS= mailClient.h 
+OBJ= mailClient.o 
 
+mailclient: $(OBJ)
+	$(CC) $(CFLAGS) -o $(^:.o=.protos) $^ ../libs/tcpClient.c
 
-%.o: %.c $(deps)
-	$(CC) -c -o $@ $< $(CFLAGS)
+$(OBJ): $(OBJ:.o=.c) $($DEPS)
+	$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
-$(target): $(objects)
-	$(CC) -o $@ $^ $(CFLAGS)
-
-clean: 
-	rm $(objects)
+clean:
+	rm -rf $(OBJ)
+	rm -rf $(OBJ:.o=.protos)

@@ -1,15 +1,17 @@
 CC=gcc
-CFLAGS = -Wall -I.
-deps = myserver.h
-objects = myserver.o
-target = myserver
+CFLAGS= -Wall -Werror -std=c99
+DEPS= myserver.h
+OBJ= myserver.o
 
+myserver: $(OBJ)
+	$(CC) $(CFLAGS) -o $(^:.o=.protos) $^
 
-%.o: %.c $(deps)
+$(OBJ): $(OBJ:.o=.c) $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(target): $(objects)
-	$(CC) -o $@ $^ $(CFLAGS)
+clean:
+	rm -rf $(OBJ)
+	rm -rf $(OBJ:.o=.protos)
 
-clean: 
-	rm $(objects)
+.PHONY: clean myserver
+

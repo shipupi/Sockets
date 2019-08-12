@@ -1,15 +1,13 @@
-CC=gcc
-CFLAGS = -Wall -I.
-deps = myserver.h
-objects = myserver.o
-target = myserver
+all: mailClient myserver
 
+mailClient:
+	cd mailClient;make
 
-%.o: %.c $(deps)
-	$(CC) -c -o $@ $< $(CFLAGS)
+myserver:
+	cd myserver;make
 
-$(target): $(objects)
-	$(CC) -o $@ $^ $(CFLAGS)
+clean:
+	cd mailClient;make clean
+	cd myserver;make clean
 
-clean: 
-	rm $(objects)
+.PHONY: all mailClient myserver clean

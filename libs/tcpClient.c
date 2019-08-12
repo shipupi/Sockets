@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-int tcpConenct(char *ip, int portInt, int *sock) {
+int tcpConnect(char *ip, int portInt, int *sock) {
 
 	in_port_t port = (in_port_t) portInt;
 	

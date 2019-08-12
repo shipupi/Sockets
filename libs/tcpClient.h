@@ -2,5 +2,5 @@
 
 #define TCPCLIENT_H
 
-int tcpConenct(char *ip, int portInt, int *sock);
+int tcpConnect(char *ip, int portInt, int *sock);
 #endif
