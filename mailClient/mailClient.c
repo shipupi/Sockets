@@ -3,20 +3,17 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include "mailClient.h"
+#include "popClient.h"
+#include "../libs/tcpClient.h"
+#include "../libs/utils.h"
 
-int main(int argc, char const *argv[])
-{
-	int sock;
-	// tcpConnect("127.0.01", 110, &sock);
-	sock = 2;
-	char buffer[1000];
-	ssize_t numBytes;
-	numBytes = recv(sock, buffer, 999, 0);
-	if (numBytes < 0) {
-		fprintf(stderr, "Error on recv\n");
-		exit(1);
-	}
-	printf("Received: %s\n", buffer);
-	close(sock);
+
+// Strings - Where should these go?
+const char* const SUCCESS_MSG = "+OK";
+
+
+int main(int argc, char const *argv[]) {
+	listMails();
 	return 0;
 }
