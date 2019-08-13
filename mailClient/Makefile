@@ -1,15 +1,15 @@
 CC=gcc
 CFLAGS = -Wall -I.
-#INC = ../libs/
 DEPS= mailClient.h 
 OBJ= mailClient.o 
+LIBS = ../libs/*.c
+LIBSH = ../libs/*.h
 
-mailclient: $(OBJ)
-	$(CC) $(CFLAGS) -o $(^:.o=.protos) $^ ../libs/tcpClient.c
+mailClient.protos: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
-$(OBJ): $(OBJ:.o=.c) $($DEPS)
+$(OBJ): $(OBJ:.o=.c) $(DEPS) $(LIBSH) 
 	$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
 clean:
 	rm -rf $(OBJ)
-	rm -rf $(OBJ:.o=.protos)
